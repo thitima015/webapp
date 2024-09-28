@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Home</title>
+</head>
+<body>
+
+    <div class="home-container">
+        <h2>Welcome</h2>
+        <p id="userInfo"></p>
+        <button class="logout-button" id="logoutButton">Logout</button>
+    </div>
+
+    <script>
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (user) {
+            document.getElementById('userInfo').innerHTML = `
+                Full Name: ${user.fullname} <br>
+                Phone: ${user.phone} <br>
+                Email: ${user.email} <br>
+                Username: ${user.username}
+            `;
+        } else {
+            alert('No user found. Please log in first.');
+            window.location.href = 'login.html';
+        }
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        });
+    </script>
+
+</body>
+</html>
